@@ -29,6 +29,12 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyclerView);
 
+
+
+        input = findViewById(R.id.editText);
+        addBtn = findViewById(R.id.button);
+        toDoList = new ArrayList<>();
+
         final ToDoAdapter toDoAdapter = new ToDoAdapter(toDoList);
 
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
@@ -36,12 +42,6 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(mLayoutManager);
 
         recyclerView.setAdapter(toDoAdapter);
-
-        input = findViewById(R.id.editText);
-        addBtn = findViewById(R.id.button);
-        toDoList = new ArrayList<>();
-        final ToDo toDo = new ToDo("Buy milk");
-        toDoList.add(toDo);
 
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override

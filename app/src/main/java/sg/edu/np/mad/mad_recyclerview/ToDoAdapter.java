@@ -10,9 +10,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+
 import java.util.ArrayList;
+
 public class ToDoAdapter extends RecyclerView.Adapter<ToDoViewHolder>{
-    private ArrayList<ToDo> data;
+    ArrayList<ToDo> data;
 
     public ToDoAdapter(ArrayList<ToDo> inputData){
         data = inputData;
@@ -28,7 +30,8 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull ToDoViewHolder holder, int position) {
         final ToDo toDo = data.get(position); //get the data  model based on position
-        holder.toDoTxtView.setText((toDo.getToDoText()));
+        holder.toDoTxtView.setText(toDo.toDoText);
+        //(toDo.getToDoText())
 
         holder.view.setOnClickListener(new View.OnClickListener(){
 
@@ -37,12 +40,11 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoViewHolder>{
                 AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
                 View view = LayoutInflater.from(v.getContext()).inflate(R.layout.alert_dialog,null);
                 TextView toDoTxt = view.findViewById(R.id.textView3);
-                toDoTxt.setText(toDo.getToDoText()+"?");
-                builder.setView(view)
-                        .setTitle("Delete")
+                toDoTxt.setText(toDo.toDoText+"?");
+                builder.setTitle("Delete")
                         .setPositiveButton("YES", new DialogInterface.OnClickListener() {
                             @Override
-                            public void onClick(DialogInterface dialog, int id) {
+                            public void onClick(DialogInterface dialog, int which) {
                                 data.remove(toDo);
                                 notifyDataSetChanged();
                             }
@@ -50,7 +52,7 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoViewHolder>{
                         .setNegativeButton("NO", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
+                                //dialog.dismiss();
                             }
                         })
                         .setView(view);
